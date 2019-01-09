@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT=`realpath $0`
+SPATH=`dirname $SCRIPT`
+
+mkdir -p ~/bin
+ln -s $SPATH/mpv ~/bin/
+ln -s $SPATH/mpv-351-workaround ~/bin/
+
+# if default config not exist
+[ ! -f ~/.config/mpv/input.conf.1 ] \
+    && cp /usr/share/examples/mpv/input.conf  ~/.config/mpv/input.conf.1

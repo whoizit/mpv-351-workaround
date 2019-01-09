@@ -1,0 +1,5 @@
+#!/bin/bash
+
+~/bin/mpv-351-workaround \
+        && /usr/bin/mpv "$@"
+
