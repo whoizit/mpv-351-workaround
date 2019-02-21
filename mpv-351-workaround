@@ -3,62 +3,62 @@
 LANG = 'RU'
 
 try:
-	# pip3 install pyxdg
-	from xdg.BaseDirectory import xdg_config_home as XDG_CONFIG_HOME
+    # pip3 install pyxdg
+    from xdg.BaseDirectory import xdg_config_home as XDG_CONFIG_HOME
 except ImportError:
-	try:
-		# pip3 install xdg
-		from xdg import XDG_CONFIG_HOME
-	except ImportError:
-		import os.path
-		XDG_CONFIG_HOME = os.path.expanduser('~') + '/.config'
+    try:
+        # pip3 install xdg
+        from xdg import XDG_CONFIG_HOME
+    except ImportError:
+        import os.path
+        XDG_CONFIG_HOME = os.path.expanduser('~') + '/.config'
 
 
 config = XDG_CONFIG_HOME + '/mpv/input.conf'
 config_1 = XDG_CONFIG_HOME + '/mpv/input.conf.1'
 
 keymaps = {
-	'EN': ( '''
-		`1234567890-=~!@#$%^&*()_+
-		qwertyuiop[]\QWERTYUIOP{}|
-		asdfghjkl;'ASDFGHJKL:"
-		zxcvbnm,./ZXCVBNM<>?
-		'''),
-	'RU': ( '''
-		ё1234567890-=Ё!"№;%:?*()_+
-		йцукенгшщзхъ\ЙЦУКЕНГШЩЗХЪ/
-		фывапролджэФЫВАПРОЛДЖЭ
-		ячсмитьбю.ЯЧСМИТЬБЮ,
-		'''),
+    'EN': ('''
+        `1234567890-=~!@#$%^&*()_+
+        qwertyuiop[]\QWERTYUIOP{}|
+        asdfghjkl;'ASDFGHJKL:"
+        zxcvbnm,./ZXCVBNM<>?
+        '''),
+    'RU': ('''
+        ё1234567890-=Ё!"№;%:?*()_+
+        йцукенгшщзхъ\ЙЦУКЕНГШЩЗХЪ/
+        фывапролджэФЫВАПРОЛДЖЭ
+        ячсмитьбю.ЯЧСМИТЬБЮ,
+        '''),
 }
 
 list_config = []
 
 with open(config_1, 'r') as file_config_1:
-	for line in file_config_1:
-		tmp_line = ''
+    for line in file_config_1:
+        tmp_line = ''
 
-		if len(line) <= 2:
-			continue
-		elif line[:2] == '##':
-			continue
-		elif line[:2] == '# ':
-			continue
-		elif line[0] == '#': 
-			tmp_line = line[1:]
-		else: 
-			tmp_line = line
-		
-		if tmp_line[1] == ' ':
-			for c1, c2 in zip(keymaps['EN'], keymaps[LANG]):
-				if c1 != c2:
-					if c1 == tmp_line[0]:
-						list_config.append(tmp_line)
-						list_config.append(c2 + tmp_line[1:])
-						break
-		else:
-			list_config.append(tmp_line)
+        if len(line) <= 2:
+            continue
+        elif line[:2] == '##':
+            continue
+        elif line[:2] == '# ':
+            continue
+        elif line[0] == '#': 
+            tmp_line = line[1:]
+        else: 
+            tmp_line = line
+        
+        if tmp_line[1] == ' ':
+            for c1, c2 in zip(keymaps['EN'], keymaps[LANG]):
+                if c1 != c2:
+                    if c1 == tmp_line[0]:
+                        list_config.append(tmp_line)
+                        list_config.append(c2 + tmp_line[1:])
+                        break
+        else:
+            list_config.append(tmp_line)
 
 with open(config, 'w') as file_config:
-	for item in list_config:
-		file_config.write("%s" % item)
+    for item in list_config:
+        file_config.write("%s" % item)

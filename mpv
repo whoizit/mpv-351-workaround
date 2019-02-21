@@ -1,5 +1,8 @@
 #!/bin/bash
 
-~/bin/mpv-351-workaround \
-        && /usr/bin/mpv "$@"
+SCRIPT=`realpath $0`
+SPATH=`dirname $SCRIPT`
+
+$SPATH/mpv-351-workaround \
+    && /usr/bin/mpv "$@"
 
