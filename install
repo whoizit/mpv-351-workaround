@@ -1,7 +1,6 @@
 #!/bin/bash
 
-SCRIPT=`realpath $0`
-SPATH=`dirname $SCRIPT`
+SPATH=$(dirname $(realpath $0))
 
 mkdir -p ~/bin
 ln -s $SPATH/mpv ~/bin/
